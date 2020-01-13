@@ -172,12 +172,12 @@ since the limiting values for $k\rightarrow \infty$ for $Ci(k\Phi_{0})$ is zero 
 %	C(k) = \exp\left(\frac{\pi}{2}cw_{xy}^{2}w_{z}\int_{0}^{1}\frac{\exp(ik\Phi_{0}y)-1}{y}dy \right)
 %\end{equation}
 
-\subsection{Potential paths to numerical evaluation of $C(k)$}
-For the one-dimensional case, we also take advantage of the integral representation of the gamma function
+\subsection{Integral representations of the exponent of $C(k)$}
+Here we can take advantage of the integral representation of the gamma function
 \begin{equation}
 	\int_{0}^{\infty}t^{b}\exp(-nt)dt = \frac{\Gamma (b+1)}{n^{b+1}}
 \end{equation}
-in particular we are going to use
+For the 1-dimensional case, we are going to use
 \begin{equation}
 	\frac{1}{\sqrt{n}}=\frac{1}{\sqrt{\pi}}\int_{0}^{\infty}dt\frac{\exp(-tn)}{\sqrt{t}}
 \end{equation}
@@ -192,49 +192,35 @@ using a variable transform $y=\exp(-t)$ we find
 \begin{equation}
 	C(k) = \exp\left(\frac{1}{\sqrt{2}}wc\int_{0}^{1}dy\frac{\exp(ik\Phi_{0}y)-1}{y\sqrt{-\ln y}}\right)
 \end{equation}
-In order to find the probability distribution we need apply the inverse Fourier transform
+Similarly, in the 2-dimensional case, we find that
 \begin{equation}
 	\begin{aligned}
-	p(\Phi\left|c,w,\Phi_{0}\right.) &= \frac{1}{2\pi}\int_{-\infty}^{\infty} \exp(-ik\Phi)C(k\left|c,w,\Phi_{0}\right.)dk\\
-	&=\frac{1}{2\pi}\int_{-\infty}^{\infty} \exp(-ik\Phi)\exp\left(\frac{1}{\sqrt{2}}wc\int_{0}^{1}dy\frac{\exp(ik\Phi_{0}y)-1}{y\sqrt{-\ln y}}\right)dk\\
-	&=\frac{1}{2\pi}\int_{-\infty}^{\infty} \exp(-ik\Phi)\exp\left(\frac{1}{\sqrt{2}}wc\int_{0}^{1}dy\frac{\cos(k\Phi_{0}y)-1+i\sin(k\Phi_{0}y)}{y\sqrt{-\ln y}}\right)dk
+	C(k) &= \exp\left(\frac{\pi}{2}cw_{xy}^{2}\sum_{n=1}^{\infty}\frac{(ik)^{n}}{n!n}\Phi_{0}^{n}\right)\\
+	&= \exp\left(\frac{\pi}{2}cw_{xy}^{2}\int_{0}^{\infty}dt(\exp(ik\Phi_{0}\exp(-t))-1) \right)\\
+	&= \exp\left(\frac{\pi}{2}cw_{xy}^{2}\int_{0}^{\infty}dt\cos(k\Phi_{0}\exp(-t))-1+i\sin(k\Phi_{0}\exp(-t)) \right)
 	\end{aligned}
 \end{equation}
-in order to evaluate this integral numerically, we will introduce the following names:
+after a variable transform $y=\exp(-t)$ we find
 \begin{equation}
 	\begin{aligned}
-	\Theta(k,\Phi_{0})&=\frac{1}{\sqrt{2}}\int_{0}^{1}dy\frac{\cos(k\Phi_{0}y)-1}{y\sqrt{-\ln y}}\\
-	\Omega(k,\Phi_{0})&=\frac{1}{\sqrt{2}}\int_{0}^{1}dy\frac{\sin(k\Phi_{0}y)}{y\sqrt{-\ln y}}
+	C(k) &= \exp\left(\frac{\pi}{2}cw_{xy}^{2}\int_{0}^{1}dy\frac{\exp(ik\Phi_{0}y)-1}{y}\right)\\
+	&= \exp\left(\frac{\pi}{2}cw_{xy}^{2}\int_{0}^{k\Phi_{0}}dx\frac{\exp(ix)-1}{x}\right)\\
+	&= \exp\left(-\frac{\pi}{2}cw_{xy}^{2}Ein(k\Phi_{0})\right)
 	\end{aligned}
 \end{equation}
-where $\Theta(k,\Phi_{0})=\Theta(-k,\Phi_{0})$ is an even function, whereas $\Omega(k,\Phi_{0})=-\Omega(-k,\Phi_{0})$ is an odd function. We can therefore write
-\begin{equation}
-	\begin{aligned}
-	p(\Phi\left|c,w,\Phi_{0}\right.) &= 
-	\frac{1}{2\pi}\int_{-\infty}^{\infty} \exp(-ik\Phi)\exp\left(wc(\Theta(k,\Phi_{0})+i\Omega(k,\Phi_{0}))\right)dk\\
-	&=\frac{1}{2\pi}\int_{-\infty}^{\infty} \exp(-ik\Phi)\exp\left(wc\Theta(k,\Phi_{0})\right)\left(\cos(wc\Omega(k,\Phi_{0}))+i\sin(wc\Omega(k,\Phi_{0}))\right)dk\\
-	&=\frac{1}{2\pi}\int_{-\infty}^{\infty} \left(\cos(k\Phi)-i\sin(k\Phi)\right)\exp\left(wc\Theta(k,\Phi_{0})\right)\left(\cos(wc\Omega(k,\Phi_{0}))+i\sin(wc\Omega(k,\Phi_{0}))\right)dk\\
-	&=\frac{1}{\pi}\int_{0}^{\infty} \exp\left(wc\Theta(k,\Phi_{0})\right)\left(\cos(k\Phi)\cos(wc\Omega(k,\Phi_{0}))+\sin(k\Phi)\sin(wc\Omega(k,\Phi_{0}))\right)dk\\
-	&=\frac{1}{\pi}\int_{0}^{\infty} \exp\left(wc\Theta(k,\Phi_{0})\right)\cos(k\Phi -wc\Omega(k,\Phi_{0}))dk
-	\end{aligned}
-\end{equation}
+where $Ein(x)$ is related to the Exponential Integral $E_{1}(x) = -\gamma -\ln x +Ein(x)$, which clarifies the connection to the Trigonometic integrals in the previous section.
 
-For the 3-dimensional case, we can also take advantage of the integral representation of the gamma function
-\begin{equation}
-	\frac{1}{n^{\frac{3}{2}}}=\frac{2}{\sqrt{\pi}}\int_{0}^{\infty}dt\sqrt{t}\exp(-tn)
-\end{equation}
-to rewrite
+Similarly, in the 3-dimensional case, we can get
 \begin{equation}
 	\begin{aligned}
 	C(k) &= \exp\left(\frac{\pi}{\sqrt{2}}cw_{xy}^{2}w_{z}\int_{0}^{\infty}dt\sqrt{t}\sum_{n=1}^{\infty}\frac{(ik)^{n}}{n!}\Phi_{0}^{n}\exp(-tn)\right)\\
 	&= \exp\left(\frac{\pi}{\sqrt{2}}cw_{xy}^{2}w_{z}\int_{0}^{\infty}dt\sqrt{t}(\exp(ik\Phi_{0}\exp(-t))-1) \right)
 	\end{aligned}
 \end{equation}
-using a variable transform $y=\exp(-t)$ we find
+and after a variable transform $y=\exp(-t)$ we find
 \begin{equation}
 	C(k) = \exp\left(\frac{\pi}{\sqrt{2}}cw_{xy}^{2}w_{z}\int_{0}^{1}\frac{\sqrt{-\ln{y}}}{y}(\exp(ik\Phi_{0}y)-1)dy \right)
 \end{equation}
-
 
 \begin{acknowledgments}
 We wish to acknowledge funding by the NSF (DMR Award
