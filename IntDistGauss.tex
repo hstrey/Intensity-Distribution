@@ -68,6 +68,18 @@ May be entered using the \verb+\pacs{#1}+ command.
 %\tableofcontents
 \onecolumngrid
 \subsection{Introduction}
+One strategy to accurately measure the concentration of a dilute solution of fluorecent molecules is to employ the properties of the Poisson distribution.  The basic idea of this method is illustrated in Fig. \cite{poissonconc}.  
+\begin{figure}[H]
+\begin{center}
+\resizebox{.9\textwidth}{!}{%
+\includegraphics[height=3cm]{Gaussian_vs_box.png}%
+\quad
+\includegraphics[height=3cm]{Poisson.png}%
+}
+\caption{The properties of a Poisson distribution can be employed to measure the concentration of dilute solutions of fluorescent molecules.}\label{fig:poissonconc}
+\end{center}
+\end{figure}
+
 In single molecule techniques one often employs a Gaussian illumination profile to measure fluorescence intensities from a dilute solution of molecules.  Typically such measurements are performed by single photon detection and result in a sequence of single photon arrival times.  Several techniques have emerged from this approach: (1) Fluorescence correlation spectroscopy measures the concentration and diffusion coefficient of fluorescent molecules by analyzing the intensity autocorrelation function; (2) Photon Counting Histogram (PCH) is analyzing the distribution function of time-binned photon counts to measure the concentration and brightness of a dilute solution of fluorescent molecules.  In this article we develop a general framework for calculating the intensity distribution of a dilute solution of Point emitters under Gaussian Detection.  As compared to the Photon Counting Histogram method, we do not assume that the intensities are averaged over a time window but are taken as instantaneous snapshots of individual spacial emmiter distributions.  We will show that the resulting Intensity distributions dramatically change character at low emitter concentrations when considering different dimensionalities of the Gaussian Detection.  In particular the one- and two-dimensional solutions are strongly structured, exhibiting discontinuities in their derivative at integer multiples of the brightness.  This makes these distributions strong candidates to distinguish and measure concentrations of mixtures of emitters of different brightnesses.  Finally, we will discuss a maximum likelihood method to determine concentration and brightness from a sequence of single photon arrival times. 
 
 
