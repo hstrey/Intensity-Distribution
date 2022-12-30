@@ -1,9 +1,11 @@
 using FFTW
-using PyPlot
+using Plots
 using QuadGK
 using MultiQuad
 
-k = LinRange(0,200,16386)
+k_max = 400.0
+n_points = 16386*4
+k = LinRange(0,k_max,n_points)
 f_real = zeros(0)
 f_imag = zeros(0)
 for kk in k
@@ -29,6 +31,7 @@ fc[1]=1
 fc[end]=real(fc[end])
 
 fc_t = [fc; reverse(conj.(fc))[2:end-1]]
-println(length(fc_t))
+n_fft = length(fc_t)
+intensity = (0:n_fft) .* π/k_max
 p = fft(fc_t)
-p5 = plot(real.(p),xaxis=("x",(0,200)),yaxis=("p(x)",(0,500)))
+p5 = plot(intensity[2:2:end],real.(p[2:2:end]),xaxis=("I",(0,3)),yaxis=("p(I)",(0,1000)))
