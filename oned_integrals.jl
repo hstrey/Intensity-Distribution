@@ -4,7 +4,7 @@ using QuadGK
 using MultiQuad
 
 k_max = 400.0
-n_points = 16386*4
+n_points = 2^16+2 # 2^b + 2 so that the fft length is power of 2^(b+1)
 k = LinRange(0,k_max,n_points)
 f_real = zeros(0)
 f_imag = zeros(0)
